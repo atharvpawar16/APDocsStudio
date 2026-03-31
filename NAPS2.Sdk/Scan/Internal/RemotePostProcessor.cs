@@ -1,0 +1,184 @@
+﻿using Microsoft.Extensions.Logging;
+using NAPS2.Images.Bitwise;
+
+namespace NAPS2.Scan.Internal;
+
+internal class RemotePostProcessor : IRemotePostProcessor
+{
+    private readonly ScanningContext _scanningContext;
+    private readonly ILogger _logger;
+
+    public RemotePostProcessor(ScanningContext scanningContext)
+    {
+        _scanningContext = scanningContext;
+        _logger = scanningContext.Logger;
+    }
+
+    public ProcessedImage? PostProcess(IMemoryImage image, ScanOptions options,
+        PostProcessingContext postProcessingContext)
+    {
+        image = DoInitialTransforms(image, options);
+        try
+        {
+            if (options.ExcludeBlankPages)
+            {
+                var op = new BlankDetectionImageOp(options.BlankPageWhiteThreshold, options.BlankPageCoverageThreshold);
+                op.Perform(image);
+                if (op.IsBlank)
+                {
+                    return null;
+                }
+            }
+
+            var scannedImage = _scanningContext.CreateProcessedImage(image, options.MaxQuality,
+                options.Quality, options.PageSize);
+            DoRevertibleTransforms(ref scannedImage, ref image, options, postProcessingContext);
+            postProcessingContext.TempPath = SaveForBackgroundOcr(image, options);
+            return scannedImage;
+        }
+        finally
+        {
+            // Can't use "using" as the image reference could change
+            image.Dispose();
+        }
+    }
+
+    private IMemoryImage DoInitialTransforms(IMemoryImage original, ScanOptions options)
+    {
+        if (!options.UseNativeUI && options.BitDepth == BitDepth.BlackAndWhite)
+        {
+            // Ensure we actually have a black & white image (this is a no-op if we already do)
+            original = original.PerformTransform(new BlackWhiteTransform(-options.Brightness));
+        }
+
+        var scaled = original;
+        if (!options.UseNativeUI && options.ScaleRatio > 1)
+        {
+            var scaleFactor = 1.0 / options.ScaleRatio;
+            scaled = scaled.PerformTransform(new ScaleTransform(scaleFactor));
+        }
+
+        if (!options.UseNativeUI && (options.StretchToPageSize || options.CropToPageSize))
+        {
+            scaled = CropAndStretch(original, options, scaled);
+        }
+
+        return scaled;
+    }
+
+    private IMemoryImage CropAndStretch(IMemoryImage original, ScanOptions options, IMemoryImage scaled)
+    {
+        if (original.HorizontalResolution <= 0 || original.VerticalResolution <= 0)
+        {
+            _logger.LogDebug("Skipping StretchToPageSize/CropToPageSize as there is no resolution data");
+            return scaled;
+        }
+
+        float width = original.Width / original.HorizontalResolution;
+        float height = original.Height / original.VerticalResolution;
+
+        if ((options.PageSize!.Width > options.PageSize.Height) ^ (width > height))
+        {
+            if (options.CropToPageSize)
+            {
+                scaled = scaled.PerformTransform(new CropTransform(
+                    0,
+                    (int) ((width - (float) options.PageSize.HeightInInches) * original.HorizontalResolution),
+                    0,
+                    (int) ((height - (float) options.PageSize.WidthInInches) * original.VerticalResolution)
+                ));
+            }
+            else
+            {
+                scaled.SetResolution((float) (original.Width / options.PageSize.HeightInInches),
+                    (float) (original.Height / options.PageSize.WidthInInches));
+            }
+        }
+        else
+        {
+            if (options.CropToPageSize)
+            {
+                scaled = scaled.PerformTransform(new CropTransform
+                (
+                    0,
+                    (int) ((width - (float) options.PageSize.WidthInInches) * original.HorizontalResolution),
+                    0,
+                    (int) ((height - (float) options.PageSize.HeightInInches) * original.VerticalResolution)
+                ));
+            }
+            else
+            {
+                scaled.SetResolution((float) (original.Width / options.PageSize.WidthInInches),
+                    (float) (original.Height / options.PageSize.HeightInInches));
+            }
+        }
+        return scaled;
+    }
+
+    private void DoRevertibleTransforms(ref ProcessedImage processedImage, ref IMemoryImage image, ScanOptions options,
+        PostProcessingContext postProcessingContext)
+    {
+        var data = processedImage.PostProcessingData with
+        {
+            PageNumber = postProcessingContext.PageNumber
+        };
+
+        if ((!options.UseNativeUI && options.BrightnessContrastAfterScan) ||
+            options.Driver is not (Driver.Wia or Driver.Twain))
+        {
+            processedImage = processedImage.WithTransform(new BrightnessTransform(options.Brightness), true);
+            processedImage = processedImage.WithTransform(new TrueContrastTransform(options.Contrast), true);
+        }
+
+        if (options.PaperSource == PaperSource.Duplex)
+        {
+            data = data with
+            {
+                PageSide = postProcessingContext.PageNumber % 2 == 0 ? PageSide.Back : PageSide.Front
+            };
+            if (options.FlipDuplexedPages && data.PageSide == PageSide.Back)
+            {
+                processedImage = processedImage.WithTransform(new RotationTransform(180), true);
+            }
+        }
+
+        if (options.RotateDegrees != 0)
+        {
+            processedImage = processedImage.WithTransform(new RotationTransform(options.RotateDegrees), true);
+        }
+
+        if (options.AutoDeskew)
+        {
+            processedImage = processedImage.WithTransform(Deskewer.GetDeskewTransform(image), true);
+        }
+
+        if (!data.Barcode.IsDetected)
+        {
+            // Even if barcode detection was attempted previously and failed, image adjustments may improve detection.
+            data = data with
+            {
+                Barcode = BarcodeDetector.Detect(image, options.BarcodeDetectionOptions)
+            };
+        }
+        if (options.ThumbnailSize.HasValue)
+        {
+            data = data with
+            {
+                Thumbnail = image.Clone()
+                    .PerformAllTransforms(processedImage.TransformState.Transforms)
+                    .PerformTransform(new ThumbnailTransform(options.ThumbnailSize.Value)),
+                ThumbnailTransformState = processedImage.TransformState
+            };
+        }
+        processedImage = processedImage.WithPostProcessingData(data, true);
+    }
+
+    private string? SaveForBackgroundOcr(IMemoryImage bitmap, ScanOptions options)
+    {
+        if (!string.IsNullOrEmpty(options.OcrParams.LanguageCode))
+        {
+            return _scanningContext.SaveToTempFile(bitmap);
+        }
+        return null;
+    }
+}

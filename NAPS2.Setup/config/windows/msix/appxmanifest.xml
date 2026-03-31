@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package
+        xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+        xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+        xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+        xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
+        xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+        xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities">
+    <Identity Name="AtharvPawar.APDocsStudio" Version="1.0.0.0"
+              Publisher="CN=AtharvPawar" ProcessorArchitecture="x64" />
+    <Properties>
+        <DisplayName>APDocs Studio</DisplayName>
+        <PublisherDisplayName>Atharv Pawar</PublisherDisplayName>
+        <Description>Scan and manage documents to PDF and more, simply and efficiently.</Description>
+        <Logo>Assets\scanner-150.png</Logo>
+    </Properties>
+    <Resources>
+        <Resource Language="en-us" />
+    </Resources>
+    <Dependencies>
+        <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.19041.0" MaxVersionTested="10.0.22631.0" />
+    </Dependencies>
+    <Capabilities>
+        <rescap:Capability Name="runFullTrust" />
+        <rescap:Capability Name="unvirtualizedResources" />
+    </Capabilities>
+    <Applications>
+        <Application Id="APDocsStudio" Executable="APDocsStudio.exe"
+                     uap10:RuntimeBehavior="win32App"
+                     uap10:TrustLevel="mediumIL">
+            <uap3:VisualElements DisplayName="APDocs Studio"
+                                 Description="Scan and manage documents to PDF and more, simply and efficiently."
+                                 Square150x150Logo="Assets\scanner-150.png"
+                                 Square44x44Logo="Assets\scanner-44.png"
+                                 BackgroundColor="transparent" />
+            <Extensions>
+                <uap3:Extension Category="windows.appExecutionAlias">
+                    <uap3:AppExecutionAlias>
+                        <uap8:ExecutionAlias Alias="APDocsStudio_Alias.exe" />
+                    </uap3:AppExecutionAlias>
+                </uap3:Extension>
+                <uap3:Extension Category="windows.fileTypeAssociation" EntryPoint="Windows.FullTrustApplication">
+                    <uap3:FileTypeAssociation Name="pdf" Parameters="&quot;%1&quot;">
+                        <uap:SupportedFileTypes>
+                            <uap:FileType ContentType="application/zip">.pdf</uap:FileType>
+                        </uap:SupportedFileTypes>
+                        <uap:DisplayName>PDF Files</uap:DisplayName>
+                        <uap:Logo>Assets\scanner-44.png</uap:Logo>
+                    </uap3:FileTypeAssociation>
+                </uap3:Extension>
+                <uap3:Extension Category="windows.fileTypeAssociation" EntryPoint="Windows.FullTrustApplication">
+                    <uap3:FileTypeAssociation Name="image" Parameters="&quot;%1&quot;">
+                        <uap:SupportedFileTypes>
+                            <uap:FileType ContentType="image/jpeg">.jpg</uap:FileType>
+                            <uap:FileType ContentType="image/jpeg">.jpeg</uap:FileType>
+                            <uap:FileType ContentType="image/png">.png</uap:FileType>
+                            <uap:FileType ContentType="image/tiff">.tiff</uap:FileType>
+                            <uap:FileType ContentType="image/tiff">.tif</uap:FileType>
+                            <uap:FileType ContentType="image/bmp">.bmp</uap:FileType>
+                        </uap:SupportedFileTypes>
+                        <uap:DisplayName>Image Files</uap:DisplayName>
+                        <uap:Logo>Assets\scanner-44.png</uap:Logo>
+                    </uap3:FileTypeAssociation>
+                </uap3:Extension>
+            </Extensions>
+        </Application>
+        <Application Id="APDocsStudio.Console" Executable="APDocsStudio.Console.exe"
+                     uap10:RuntimeBehavior="win32App"
+                     uap10:TrustLevel="mediumIL">
+            <uap:VisualElements DisplayName="APDocs Studio"
+                                Description="Scan and manage documents to PDF and more, simply and efficiently."
+                                Square150x150Logo="Assets\scanner-150.png"
+                                Square44x44Logo="Assets\scanner-44.png"
+                                BackgroundColor="transparent"
+                                AppListEntry="none" />
+            <Extensions>
+                <uap3:Extension Category="windows.appExecutionAlias">
+                    <uap3:AppExecutionAlias>
+                        <uap8:ExecutionAlias Alias="APDocsStudio.Console.exe" />
+                    </uap3:AppExecutionAlias>
+                </uap3:Extension>
+            </Extensions>
+        </Application>
+        <Application Id="APDocsStudio.Worker" Executable="lib\APDocsStudio.Worker.exe"
+                     uap10:RuntimeBehavior="win32App"
+                     uap10:TrustLevel="mediumIL">
+            <uap:VisualElements DisplayName="APDocs Studio"
+                                Description="Scan and manage documents to PDF and more, simply and efficiently."
+                                Square150x150Logo="Assets\scanner-150.png"
+                                Square44x44Logo="Assets\scanner-44.png"
+                                BackgroundColor="transparent"
+                                AppListEntry="none" />
+            <Extensions>
+                <uap3:Extension Category="windows.appExecutionAlias">
+                    <uap3:AppExecutionAlias>
+                        <uap8:ExecutionAlias Alias="APDocsStudio.Worker_Alias.exe" />
+                    </uap3:AppExecutionAlias>
+                </uap3:Extension>
+            </Extensions>
+        </Application>
+    </Applications>
+</Package>
