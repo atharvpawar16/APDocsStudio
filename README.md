@@ -1,88 +1,98 @@
+<div align="center">
+
+<img src="NAPS2.Lib/Icons/app-128.png" alt="APDocs Studio Logo" width="100" />
+
 # APDocs Studio
 
-> The most powerful photo and PDF editor for Windows — edit with Paint, run OCR, and export perfect documents in seconds.
+**The most powerful photo & PDF editor for Windows.**
+Edit images with Paint, extract text with OCR, and export flawless PDFs — all in one free app.
 
-APDocs Studio is a professional-grade photo and PDF editing suite for Windows. It combines deep image editing, OCR text extraction, and seamless **Microsoft Paint integration** — so you can use Paint's familiar Select & Cut tools to precisely edit any photo or PDF page before exporting.
+[![License](https://img.shields.io/badge/license-Proprietary-red.svg)](#license)
+[![Platform](https://img.shields.io/badge/platform-Windows-blue.svg)](#)
+[![.NET](https://img.shields.io/badge/.NET-9.0-purple.svg)](#)
+[![GitHub Stars](https://img.shields.io/github/stars/atharvpawar16/APDocsStudio?style=social)](https://github.com/atharvpawar16/APDocsStudio)
 
----
+[Features](#features) · [Paint Guide](#paint-integration-guide) · [Getting Started](#getting-started) · [Shortcuts](#keyboard-shortcuts)
 
-## Why APDocs Studio?
-
-Most PDF tools make you pay for basic editing. Most photo editors don't handle documents. APDocs Studio does both — and it's the only app that lets you **open any image or PDF page directly in Paint**, edit it with full precision using Paint's selection tools, and bring it back as a polished PDF.
-
----
-
-## Key Features
-
-### Photo Editing
-- **Brightness, contrast, saturation, sharpness** — fine-tune every photo
-- **Crop & rotate** — trim edges, fix orientation, straighten images
-- **Deskew** — automatically straighten tilted document images
-- **Black & white / grayscale conversion** — clean up documents instantly
-- **Hue & color correction** — fix color casts in photos
-- **Blank page detection** — auto-remove empty pages from batches
-
-### PDF Tools
-- **Export to searchable PDF** — with embedded OCR text layer
-- **Import existing PDFs** — open, edit pages, re-export
-- **Merge multiple images** into a single PDF
-- **Page reordering** — drag pages into any order before export
-- **PDF compression settings** — balance quality vs file size
-
-### Paint Integration — Edit with Select & Cut
-APDocs Studio lets you send any image directly to **Microsoft Paint** for precision editing:
-
-1. Right-click any page → **"Edit with Paint"**
-2. In Paint, use the **Select tool** (dotted rectangle in the toolbar) to draw a box around the area you want to keep or remove
-3. To **cut out** an unwanted section: select it → press `Ctrl + X` (Cut) — the area is removed and filled with white
-4. To **keep only a region**: select it → `Ctrl + C` → `Ctrl + N` → `Ctrl + V` → save
-5. Use **Free-form Select** for irregular shapes — draw around any object to isolate it
-6. Save in Paint (`Ctrl + S`) and APDocs Studio automatically reloads the edited image
-7. Export the final result as PDF with one click
-
-### OCR
-- **Tesseract OCR** — extract text from any image
-- **40+ languages** supported
-- Creates **fully searchable PDFs** with invisible text layer
+</div>
 
 ---
 
-## How to Edit Photos Using Paint's Select & Cut
+## What is APDocs Studio?
 
-Paint is built into every Windows PC and is perfect for quick, precise photo edits. Here's how to use it with APDocs Studio:
+APDocs Studio is a professional-grade **photo and PDF editing suite** built for Windows. It brings together everything you need to work with documents and images — deep image editing, Tesseract-powered OCR, PDF import/export, and a unique **Microsoft Paint integration** that lets you use Paint's Select & Cut tools for pixel-perfect edits.
 
-### Rectangular Select & Cut
+No subscriptions. No cloud. No bloat. Just a fast, capable desktop app that runs entirely on your machine.
+
+---
+
+## Features
+
+### 🖼️ Photo Editing
+| Feature | Description |
+|---|---|
+| Brightness & Contrast | Fine-tune exposure and tonal range on any image |
+| Saturation & Hue | Correct color casts and shift hues precisely |
+| Sharpness | Enhance detail with adjustable sharpening |
+| Crop & Rotate | Trim edges, fix orientation, flip pages |
+| Auto Deskew | Straighten tilted images with one click |
+| Black & White | Convert to grayscale or true black & white |
+| Blank Page Detection | Automatically remove empty pages from batches |
+
+### 📄 PDF Tools
+| Feature | Description |
+|---|---|
+| PDF Import | Open any existing PDF and edit page by page |
+| PDF Export | Save as standard or searchable PDF |
+| Merge | Combine multiple images into a single PDF |
+| Page Reorder | Drag and drop pages into any order |
+| Compression Control | Balance file size vs. image quality |
+| OCR Text Layer | Embed invisible searchable text into exported PDFs |
+
+### 🎨 Paint Integration
+The only editor that lets you open any image directly in **Microsoft Paint** — already installed on every Windows PC — for precision editing using Paint's native Select & Cut tools. Changes sync back to APDocs Studio automatically.
+
+### 🔍 OCR — Text Extraction
+Powered by **Tesseract**, one of the most accurate open-source OCR engines available. Extract text from any image in 40+ languages and create fully searchable, copy-pasteable PDFs.
+
+---
+
+## Paint Integration Guide
+
+> Microsoft Paint is built into every Windows PC. APDocs Studio uses it as a precision editing tool.
+
+### ✂️ Rectangular Select & Cut
+Remove any rectangular area from an image:
 ```
-1. In APDocs Studio, right-click a page → Edit with Paint
-2. Click the "Select" dropdown in Paint's toolbar (Home tab)
-3. Choose "Rectangular selection"
-4. Click and drag to draw a box around the area to remove
-5. Press Delete or Ctrl+X to cut it out
-6. Save with Ctrl+S — APDocs Studio reloads it automatically
+1. Right-click a page in APDocs Studio → Edit with Paint
+2. In Paint's Home tab, click Select → Rectangular selection
+3. Draw a box around the area you want to remove
+4. Press Delete or Ctrl+X to cut it out (fills with white)
+5. Press Ctrl+S to save — APDocs Studio reloads it instantly
 ```
 
-### Free-form Select (cut any shape)
+### 🔷 Free-form Select
+Isolate any irregular shape:
 ```
-1. Click the "Select" dropdown → "Free-form selection"
-2. Draw around the exact shape you want to isolate
-3. Ctrl+C to copy, Ctrl+N for new canvas, Ctrl+V to paste
-4. Save and return to APDocs Studio
-```
-
-### Remove a Watermark or Stamp
-```
-1. Open image in Paint via APDocs Studio
-2. Use Rectangular Select to box around the watermark
-3. Press Delete — it fills with the background color (set to white first)
-4. Save → back in APDocs Studio, export as clean PDF
+1. Click Select → Free-form selection
+2. Draw around the exact shape you want to keep
+3. Ctrl+C → Ctrl+N → Ctrl+V to paste onto a clean canvas
+4. Save → export as PDF from APDocs Studio
 ```
 
-### Crop to a Specific Region
+### 🧹 Remove a Watermark or Stamp
 ```
-1. Open in Paint → Select the region you want to keep
-2. Click Image → Crop (or press Ctrl+Shift+X in newer Paint)
-3. Save → APDocs Studio picks up the cropped image
-4. Export as PDF with one click
+1. Right-click Color 2 in Paint → set to white
+2. Use Rectangular Select to box the watermark
+3. Press Delete — it fills with white
+4. Ctrl+S → clean PDF export in APDocs Studio
+```
+
+### 📐 Crop to a Specific Region
+```
+1. Draw a Rectangular selection around the region to keep
+2. Click Image → Crop  (or Ctrl+Shift+X on Windows 11)
+3. Ctrl+S → APDocs Studio picks up the cropped image
 ```
 
 ---
@@ -90,8 +100,9 @@ Paint is built into every Windows PC and is perfect for quick, precise photo edi
 ## Getting Started
 
 ### Requirements
-- Windows 10 or later (64-bit)
-- .NET 9 Runtime ([download here](https://dotnet.microsoft.com/en-us/download/dotnet/9.0))
+
+- Windows 10 / 11 (64-bit)
+- [.NET 9 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
 - Microsoft Paint (pre-installed on all Windows PCs)
 
 ### Build from Source
@@ -107,18 +118,20 @@ dotnet run --project APDocsStudio.csproj
 
 ## Keyboard Shortcuts
 
-| Action              | Shortcut            |
-|---------------------|---------------------|
-| Save as PDF         | `Ctrl + S`          |
-| Save as Image       | `Ctrl + I`          |
-| Import file         | `Ctrl + O`          |
-| Run OCR             | `Ctrl + Alt + O`    |
-| Rotate Left         | `Ctrl + Shift + ←`  |
-| Rotate Right        | `Ctrl + Shift + →`  |
-| Email PDF           | `Ctrl + E`          |
-| Print               | `Ctrl + P`          |
-| Zoom In             | `Ctrl + +`          |
-| Zoom Out            | `Ctrl + -`          |
+| Action | Shortcut |
+|---|---|
+| Save as PDF | `Ctrl + S` |
+| Save as Image | `Ctrl + I` |
+| Import File | `Ctrl + O` |
+| Run OCR | `Ctrl + Alt + O` |
+| Batch Process | `Ctrl + B` |
+| Rotate Left | `Ctrl + Shift + ←` |
+| Rotate Right | `Ctrl + Shift + →` |
+| Email PDF | `Ctrl + E` |
+| Print | `Ctrl + P` |
+| Zoom In | `Ctrl + +` |
+| Zoom Out | `Ctrl + -` |
+| Undo | `Ctrl + Z` |
 
 ---
 
@@ -126,41 +139,70 @@ dotnet run --project APDocsStudio.csproj
 
 ```
 APDocsStudio/
-├── Program.cs                  # Entry point
-├── APDocsStudio.csproj         # Main project file
-├── NAPS2.Images/               # Core image processing & pixel ops
-├── NAPS2.Images.Gdi/           # GDI+ (System.Drawing) image backend
-├── NAPS2.Internals/            # Shared utilities & threading
-├── NAPS2.Sdk/                  # Core document processing SDK
-├── NAPS2.Lib/                  # App logic, config, UI controllers
-├── NAPS2.Lib.WinForms/         # WinForms-specific UI layer
-├── NAPS2.Setup/                # App settings & installer config
-└── Stubs/                      # Platform compatibility stubs
+├── Program.cs                    # Application entry point
+├── APDocsStudio.csproj           # Main project file
+├── GlobalUsings.cs               # Global using directives
+│
+├── NAPS2.Images/                 # Core image processing & pixel operations
+│   └── Bitwise/                  # Low-level bitwise image ops
+│   └── Transforms/               # Image transform pipeline
+│
+├── NAPS2.Images.Gdi/             # GDI+ / System.Drawing image backend
+├── NAPS2.Internals/              # Shared utilities, threading, serialization
+│
+├── NAPS2.Sdk/                    # Core document processing SDK
+│   ├── Images/                   # Image metadata & processing
+│   ├── Pdf/                      # PDF import/export via PdfSharp & Pdfium
+│   ├── Ocr/                      # Tesseract OCR engine integration
+│   └── ImportExport/             # File import/export pipeline
+│
+├── NAPS2.Lib/                    # Application logic & UI controllers
+│   ├── EtoForms/                 # Cross-platform UI layer (Eto.Forms)
+│   ├── Config/                   # App & user configuration system
+│   ├── Images/                   # UI image list, thumbnails, undo stack
+│   ├── Ocr/                      # OCR language management
+│   └── Pdf/                      # PDF settings & save operations
+│
+├── NAPS2.Lib.WinForms/           # WinForms-specific UI implementation
+├── NAPS2.Setup/                  # App settings & installer configuration
+└── Stubs/                        # Platform compatibility stubs
 ```
 
-> This repository shares ~50% of the full source. The UI layer, email integration, remoting, and update system are not included.
+> **Note:** This repository shares ~50% of the full source. The complete UI layer, email integration, remoting, and auto-update system are not included.
 
 ---
 
 ## Tech Stack
 
 | Layer | Technology |
-|-------|-----------|
-| Language | C# 12 / .NET 9 |
-| UI | Eto.Forms + WinForms |
-| DI | Autofac |
-| OCR | Tesseract via NAPS2.Tesseract.Binaries |
-| PDF | PdfSharp + Pdfium |
+|---|---|
+| Language | C# 12 |
+| Runtime | .NET 9 |
+| UI Framework | Eto.Forms + WinForms |
+| Dependency Injection | Autofac |
+| OCR Engine | Tesseract (via NAPS2.Tesseract.Binaries) |
+| PDF Processing | PdfSharp + Pdfium |
 | Image Processing | GDI+ / System.Drawing |
 | Logging | NLog |
-| Serialization | Newtonsoft.Json + Protobuf |
+| IPC | gRPC / Protobuf |
+| Serialization | Newtonsoft.Json |
+| Barcode Detection | ZXing.Net |
+| External Editor | Microsoft Paint |
 
 ---
 
 ## License
 
-Copyright © 2024 Atharv Pawar. All rights reserved.
+Copyright © 2024 **Atharv Pawar**. All rights reserved.
+
+The underlying document processing libraries are derived from the [NAPS2 project](https://github.com/cyanfish/naps2) and are subject to the GPL license. See individual `LICENSE` files in each subfolder for details.
 
 ---
 
-Made by **Atharv Pawar** · [GitHub](https://github.com/atharvpawar16)
+<div align="center">
+
+Made with ❤️ by [Atharv Pawar](https://github.com/atharvpawar16)
+
+⭐ If you find this useful, consider starring the repo!
+
+</div>
