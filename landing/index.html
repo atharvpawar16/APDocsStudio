@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APDocs Studio — Photo & PDF Editor for Windows</title>
+  <meta name="description" content="The most powerful photo and PDF editor for Windows. Edit with Paint, run OCR, export perfect PDFs. Free & open source." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f8faff;
+      --white: #fff;
+      --border: #e4e9f5;
+      --accent: #2563eb;
+      --accent2: #7c3aed;
+      --accent3: #059669;
+      --text: #0f172a;
+      --muted: #64748b;
+      --r: 16px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.65; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(248,250,255,0.95); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 62px;
+    }
+    .logo {
+      font-size: 1.1rem; font-weight: 800;
+      background: linear-gradient(120deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--muted); font-size: 0.875rem; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-btn {
+      background: linear-gradient(120deg, var(--accent), var(--accent2));
+      color: #fff; padding: 0.45rem 1.2rem; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 700; transition: opacity .2s;
+    }
+    .nav-btn:hover { opacity: 0.85; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+
+    /* HERO */
+    .hero {
+      text-align: center; padding: 7rem 1.5rem 5rem;
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(37,99,235,0.09) 0%, transparent 70%);
+    }
+    .badge {
+      display: inline-block;
+      background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2);
+      color: var(--accent); font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 1px; padding: 0.3rem 1rem; border-radius: 100px;
+      margin-bottom: 1.75rem; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4.5rem); font-weight: 900;
+      letter-spacing: -2px; line-height: 1.06; margin-bottom: 1.4rem;
+    }
+    .g1 { background: linear-gradient(120deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .g2 { background: linear-gradient(120deg, var(--accent2), var(--accent3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero p { font-size: 1.1rem; color: var(--muted); max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.75; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-p {
+      background: linear-gradient(120deg, var(--accent), var(--accent2));
+      color: #fff; padding: 0.85rem 2rem; border-radius: 12px;
+      font-weight: 800; font-size: 1rem;
+      box-shadow: 0 6px 24px rgba(37,99,235,0.28);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-p:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(37,99,235,0.38); }
+    .btn-s {
+      background: var(--white); color: var(--text);
+      padding: 0.85rem 2rem; border-radius: 12px;
+      font-weight: 600; font-size: 1rem;
+      border: 1.5px solid var(--border);
+      transition: border-color .2s, transform .2s;
+    }
+    .btn-s:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    /* STATS */
+    .stats { display: grid; grid-template-columns: repeat(5,1fr); background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .stat { text-align: center; padding: 1.75rem 1rem; border-right: 1px solid var(--border); }
+    .stat:last-child { border-right: none; }
+    .stat-n { font-size: 1.8rem; font-weight: 900; background: linear-gradient(120deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-l { font-size: 0.74rem; color: var(--muted); margin-top: 0.25rem; }
+
+    /* SECTIONS */
+    .sec { padding: 5rem 1.5rem; max-width: 1120px; margin: 0 auto; }
+    .sec-alt { background: linear-gradient(135deg, #eef2ff, #f5f0ff); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 5rem 1.5rem; }
+    .sec-alt-inner { max-width: 1120px; margin: 0 auto; }
+    .sec-tag { font-size: 0.7rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+    .sec-title { font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 900; letter-spacing: -0.8px; margin-bottom: 0.8rem; line-height: 1.15; }
+    .sec-sub { color: var(--muted); font-size: 1rem; max-width: 520px; margin-bottom: 2.75rem; line-height: 1.7; }
+
+    /* FEATURES */
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; }
+    .card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 1.75rem;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      position: relative; overflow: hidden;
+    }
+    .card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0); transform-origin: left; transition: transform .3s;
+    }
+    .card:hover::after { transform: scaleX(1); }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(37,99,235,0.12); border-color: rgba(37,99,235,0.25); }
+    .icon { width: 46px; height: 46px; border-radius: 12px; background: linear-gradient(135deg, rgba(37,99,235,0.1), rgba(124,58,237,0.08)); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1rem; transition: transform .3s; }
+    .card:hover .icon { transform: scale(1.1) rotate(-5deg); }
+    .card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .card p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+
+    /* PAINT CARDS */
+    .grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.2rem; margin-top: 2.75rem; }
+    .pcard {
+      background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--accent3);
+      border-radius: var(--r); padding: 1.75rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .pcard:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(5,150,105,0.1); }
+    .pcard h3 { font-size: 0.95rem; font-weight: 700; color: var(--accent3); margin-bottom: 0.8rem; }
+    .pcard ol { padding-left: 1.2rem; }
+    .pcard li { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.4rem; line-height: 1.6; }
+    .pcard li strong { color: var(--text); }
+    .kbd { display: inline-block; background: #f1f5f9; color: #334155; padding: 0.1rem 0.45rem; border-radius: 5px; font-size: 0.77rem; font-family: Consolas, monospace; border: 1px solid #cbd5e1; box-shadow: 0 1px 0 #94a3b8; }
+
+    /* STEPS */
+    .grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.2rem; }
+    .step { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); padding: 2rem 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.04); transition: transform .25s, box-shadow .25s; }
+    .step:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(37,99,235,0.1); }
+    .step-n { font-size: 2.8rem; font-weight: 900; line-height: 1; margin-bottom: 0.8rem; background: linear-gradient(120deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .step p { font-size: 0.875rem; color: var(--muted); line-height: 1.65; }
+
+    /* TECH */
+    .pills { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 2rem; }
+    .pill { background: var(--white); border: 1.5px solid var(--border); border-radius: 100px; padding: 0.38rem 1rem; font-size: 0.83rem; color: var(--muted); font-weight: 500; transition: border-color .2s, color .2s, transform .2s; }
+    .pill:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* CTA */
+    .cta { text-align: center; padding: 6rem 1.5rem; background: var(--white); }
+    .cta h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 900; letter-spacing: -0.8px; margin-bottom: 1rem; }
+    .cta p { color: var(--muted); margin-bottom: 2.5rem; font-size: 1.05rem; }
+    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer { text-align: center; padding: 2rem 1.5rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; }
+    footer a { color: var(--accent); }
+    footer a:hover { text-decoration: underline; }
+
+    /* SCROLL REVEAL */
+    .sr { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .sr.in { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: .1s; }
+    .d2 { transition-delay: .2s; }
+    .d3 { transition-delay: .3s; }
+    .d4 { transition-delay: .4s; }
+    .d5 { transition-delay: .5s; }
+    .d6 { transition-delay: .6s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .grid-3 { grid-template-columns: repeat(2,1fr); }
+      .grid-4 { grid-template-columns: repeat(2,1fr); }
+      .stats { grid-template-columns: repeat(3,1fr); }
+      .stat:nth-child(3) { border-right: none; }
+      .stat:nth-child(4), .stat:nth-child(5) { border-top: 1px solid var(--border); }
+      .stat:nth-child(5) { border-right: none; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; position: absolute; top: 62px; left: 0; right: 0; flex-direction: column; background: var(--white); border-bottom: 1px solid var(--border); padding: 0.5rem 0; z-index: 99; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+      .nav-links.open { display: flex; }
+      .nav-links li a { display: block; padding: 0.75rem 2rem; font-size: 1rem; }
+      .hamburger { display: flex; }
+      .grid-3, .grid-4, .grid-2 { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(2,1fr); }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat:nth-child(odd) { border-right: 1px solid var(--border); }
+      .stat:last-child { border-bottom: none; grid-column: span 2; }
+      .hero { padding: 4.5rem 1.25rem 3.5rem; }
+      .sec { padding: 3.5rem 1.25rem; }
+      .sec-alt { padding: 3.5rem 1.25rem; }
+      nav { padding: 0 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <span class="logo">APDocs Studio</span>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#paint">Paint Guide</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#tech">Tech</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem">
+    <a href="https://github.com/atharvpawar16/APDocsStudio" class="nav-btn" target="_blank" rel="noopener">⭐ GitHub</a>
+    <button class="hamburger" id="hbg" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="badge">🖼️ Free &nbsp;·&nbsp; Windows &nbsp;·&nbsp; Open Source</div>
+  <h1>The Most Powerful<br><span class="g1">Photo &amp; PDF Editor</span><br><span class="g2">for Windows</span></h1>
+  <p>Edit photos with Microsoft Paint's Select &amp; Cut tools, run OCR on any image, and export flawless PDFs — all from one app. No subscriptions. No bloat.</p>
+  <div class="hero-btns">
+    <a href="https://github.com/atharvpawar16/APDocsStudio/releases" class="btn-p" target="_blank" rel="noopener">⬇️ Download Free</a>
+    <a href="https://github.com/atharvpawar16/APDocsStudio" class="btn-s" target="_blank" rel="noopener">⭐ Star on GitHub</a>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n">40+</div><div class="stat-l">OCR Languages</div></div>
+  <div class="stat"><div class="stat-n">Paint</div><div class="stat-l">Native Integration</div></div>
+  <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Free &amp; Open Source</div></div>
+  <div class="stat"><div class="stat-n">.NET 9</div><div class="stat-l">Modern Runtime</div></div>
+  <div class="stat"><div class="stat-n">0</div><div class="stat-l">Subscriptions</div></div>
+</div>
+
+<div class="sec" id="features">
+  <div class="sec-tag sr">Features</div>
+  <h2 class="sec-title sr">Everything a photo &amp; PDF editor should do</h2>
+  <p class="sec-sub sr">Powerful editing tools, OCR, and Paint integration — all in one place.</p>
+  <div class="grid-3">
+    <div class="card sr"><div class="icon">🎨</div><h3>Paint Integration</h3><p>Send any photo or PDF page to Microsoft Paint. Use Select &amp; Cut to remove, crop, or isolate any part — then export as a perfect PDF.</p></div>
+    <div class="card sr d1"><div class="icon">📄</div><h3>PDF Editor</h3><p>Import existing PDFs, edit pages, reorder, merge, and re-export. Create searchable PDFs with an embedded OCR text layer.</p></div>
+    <div class="card sr d2"><div class="icon">🖼️</div><h3>Photo Editor</h3><p>Adjust brightness, contrast, saturation, hue, and sharpness. Crop, rotate, deskew, and apply color corrections non-destructively.</p></div>
+    <div class="card sr d1"><div class="icon">🔍</div><h3>OCR — Text from Images</h3><p>Powered by Tesseract. Extract text from any photo in 40+ languages. Makes PDFs fully searchable and copy-pasteable.</p></div>
+    <div class="card sr d2"><div class="icon">✂️</div><h3>Crop &amp; Deskew</h3><p>Precisely crop any image to remove borders. Auto-deskew straightens tilted images with one click.</p></div>
+    <div class="card sr d3"><div class="icon">⚡</div><h3>Batch Processing</h3><p>Process multiple images at once. Auto-detect and remove blank pages. Handle dozens of pages in one go.</p></div>
+    <div class="card sr d1"><div class="icon">📧</div><h3>Email &amp; Export</h3><p>Send PDFs via Gmail, Outlook, or Thunderbird. Export as PDF, JPG, PNG, TIFF, or BMP with one click.</p></div>
+    <div class="card sr d2"><div class="icon">⌨️</div><h3>Keyboard Shortcuts</h3><p>Full keyboard control. Save, rotate, zoom, and navigate without touching the mouse.</p></div>
+    <div class="card sr d3"><div class="icon">🌍</div><h3>Multi-language UI</h3><p>The interface is localized into 40+ languages, making it accessible to users worldwide.</p></div>
+  </div>
+</div>
+
+<div class="sec-alt" id="paint">
+  <div class="sec-alt-inner">
+    <div class="sec-tag sr">Paint Integration Guide</div>
+    <h2 class="sec-title sr">How to edit photos using Paint's Select &amp; Cut</h2>
+    <p class="sec-sub sr">Microsoft Paint is built into every Windows PC. APDocs Studio lets you open any image in Paint, edit precisely, and bring the result back as a polished PDF.</p>
+    <div class="grid-2">
+      <div class="pcard sr"><h3>✂️ Rectangular Select &amp; Cut</h3><ol><li>Right-click a page → <strong>Edit with Paint</strong></li><li>Click <strong>Select</strong> in Paint's Home toolbar</li><li>Choose <strong>Rectangular selection</strong></li><li>Draw a box around the area to remove</li><li>Press <kbd class="kbd">Delete</kbd> or <kbd class="kbd">Ctrl+X</kbd></li><li>Press <kbd class="kbd">Ctrl+S</kbd> — reloads instantly</li></ol></div>
+      <div class="pcard sr"><h3>🔷 Free-form Select</h3><ol><li>Click <strong>Select</strong> → <strong>Free-form selection</strong></li><li>Draw around the exact shape to keep</li><li>Press <kbd class="kbd">Ctrl+C</kbd> to copy</li><li>Press <kbd class="kbd">Ctrl+N</kbd> for new canvas</li><li>Press <kbd class="kbd">Ctrl+V</kbd> to paste</li><li>Save → export as PDF</li></ol></div>
+      <div class="pcard sr"><h3>🧹 Remove a Watermark</h3><ol><li>Open image in Paint via APDocs Studio</li><li>Set background to <strong>white</strong> (right-click Color 2)</li><li>Use <strong>Rectangular Select</strong> to box the watermark</li><li>Press <kbd class="kbd">Delete</kbd> — fills with white</li><li>Save with <kbd class="kbd">Ctrl+S</kbd></li><li>Export as a clean PDF</li></ol></div>
+      <div class="pcard sr"><h3>📐 Crop to Region</h3><ol><li>Draw a <strong>Rectangular selection</strong> around the region to keep</li><li>Click <strong>Image → Crop</strong> in the toolbar</li><li>Or press <kbd class="kbd">Ctrl+Shift+X</kbd> (Windows 11)</li><li>Save with <kbd class="kbd">Ctrl+S</kbd></li><li>APDocs Studio picks it up automatically</li><li>Export as PDF or image in one click</li></ol></div>
+    </div>
+  </div>
+</div>
+
+<div class="sec" id="how">
+  <div class="sec-tag sr">How it works</div>
+  <h2 class="sec-title sr">From photo to perfect PDF in 4 steps</h2>
+  <p class="sec-sub sr">No complicated setup. Open, edit, and export in minutes.</p>
+  <div class="grid-4">
+    <div class="step sr"><div class="step-n">01</div><h3>Open your file</h3><p>Import any photo, image, or PDF — JPG, PNG, BMP, TIFF, or multi-page PDF. Drag and drop or use Ctrl+O.</p></div>
+    <div class="step sr d1"><div class="step-n">02</div><h3>Edit</h3><p>Adjust brightness, contrast, crop, rotate, deskew. Or send to Paint for precision Select &amp; Cut editing.</p></div>
+    <div class="step sr d2"><div class="step-n">03</div><h3>Run OCR</h3><p>Hit Ctrl+Alt+O to extract text from any page. Creates a searchable PDF with an invisible text layer.</p></div>
+    <div class="step sr d3"><div class="step-n">04</div><h3>Export &amp; Share</h3><p>Save as PDF or image, email directly, or print. Auto-save profiles handle repetitive workflows.</p></div>
+  </div>
+</div>
+
+<div class="sec-alt" id="tech">
+  <div class="sec-alt-inner">
+    <div class="sec-tag sr">Tech Stack</div>
+    <h2 class="sec-title sr">Built on solid foundations</h2>
+    <p class="sec-sub sr">Modern .NET 9, proven libraries, and a clean architecture that's fast and reliable.</p>
+    <div class="pills">
+      <span class="pill sr">C# 12</span><span class="pill sr">.NET 9</span><span class="pill sr">Eto.Forms</span><span class="pill sr">WinForms</span><span class="pill sr">Autofac</span><span class="pill sr">Tesseract OCR</span><span class="pill sr">PdfSharp</span><span class="pill sr">Pdfium</span><span class="pill sr">GDI+ / System.Drawing</span><span class="pill sr">NLog</span><span class="pill sr">gRPC / Protobuf</span><span class="pill sr">Newtonsoft.Json</span><span class="pill sr">ZXing.Net</span><span class="pill sr">Microsoft Paint</span>
+    </div>
+  </div>
+</div>
+
+<div class="cta">
+  <h2 class="sr">Start editing smarter today</h2>
+  <p class="sr">Free, open source, and built for Windows. Download and start editing in minutes.</p>
+  <div class="cta-btns sr">
+    <a href="https://github.com/atharvpawar16/APDocsStudio/releases" class="btn-p" target="_blank" rel="noopener">⬇️ Download Free</a>
+    <a href="https://github.com/atharvpawar16/APDocsStudio" class="btn-s" target="_blank" rel="noopener">⭐ Star on GitHub</a>
+  </div>
+</div>
+
+<footer>
+  <p>APDocs Studio &copy; 2024 Atharv Pawar &nbsp;·&nbsp;
+    <a href="https://github.com/atharvpawar16/APDocsStudio" target="_blank" rel="noopener">GitHub</a> &nbsp;·&nbsp;
+    <a href="https://github.com/atharvpawar16/APDocsStudio/blob/main/LICENSE" target="_blank" rel="noopener">GPL-2.0</a> &nbsp;·&nbsp;
+    Built on <a href="https://github.com/cyanfish/naps2" target="_blank" rel="noopener">NAPS2</a>
+  </p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.sr').forEach(el => obs.observe(el));
+
+  // Hamburger
+  document.getElementById('hbg').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+  document.querySelectorAll('#navLinks a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  });
+</script>
+</body>
+</html>
