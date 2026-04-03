@@ -33,7 +33,7 @@
     <PackageReference Include="NLog.Extensions.Logging" Version="5.3.11" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="GrpcDotNetNamedPipes" Version="3.0.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.65.0" PrivateAssets="all" />
+    <PackageReference Include="Grpc.Tools" Version="2.80.0" PrivateAssets="all" />
     <PackageReference Include="NAPS2.PdfSharp" Version="1.0.1" />
     <PackageReference Include="MimeKitLite" Version="4.7.1" />
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
