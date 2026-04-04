@@ -11,8 +11,9 @@ Edit images with Paint, extract text with OCR, and export flawless PDFs — all 
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-blue.svg)](#)
 [![.NET](https://img.shields.io/badge/.NET-9.0-purple.svg)](#)
 [![GitHub Stars](https://img.shields.io/github/stars/atharvpawar16/APDocsStudio?style=social)](https://github.com/atharvpawar16/APDocsStudio)
+[![Website](https://img.shields.io/badge/website-apdocsstudio.netlify.app-blue)](https://apdocsstudio.netlify.app)
 
-[Features](#features) · [Paint Guide](#paint-integration-guide) · [Getting Started](#getting-started) · [Shortcuts](#keyboard-shortcuts)
+[Features](#features) · [Paint Guide](#paint-integration-guide) · [Getting Started](#getting-started) · [Shortcuts](#keyboard-shortcuts) · [Website](https://apdocsstudio.netlify.app)
 
 </div>
 
