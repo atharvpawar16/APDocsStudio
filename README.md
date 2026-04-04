@@ -1,54 +1,47 @@
 # APDocs Studio
 
-> The most powerful photo and PDF editor for Windows — scan, edit with Paint, and export perfect documents in seconds.
+> The most powerful photo and PDF editor for Windows — edit with Paint, run OCR, and export perfect documents in seconds.
 
-APDocs Studio is a professional-grade photo and PDF editing suite for Windows. It combines high-quality document scanning, deep image editing, OCR text extraction, and seamless **Microsoft Paint integration** — so you can use Paint's familiar Select & Cut tools to precisely edit any photo or scanned page before saving as PDF.
+APDocs Studio is a professional-grade photo and PDF editing suite for Windows. It combines deep image editing, OCR text extraction, and seamless **Microsoft Paint integration** — so you can use Paint's familiar Select & Cut tools to precisely edit any photo or PDF page before exporting.
 
 ---
 
 ## Why APDocs Studio?
 
-Most PDF tools make you pay for basic editing. Most photo editors don't handle documents. APDocs Studio does both — and it's the only app that lets you **open any scanned image or PDF page directly in Paint**, edit it with full precision using Paint's selection tools, and bring it back as a polished PDF.
+Most PDF tools make you pay for basic editing. Most photo editors don't handle documents. APDocs Studio does both — and it's the only app that lets you **open any image or PDF page directly in Paint**, edit it with full precision using Paint's selection tools, and bring it back as a polished PDF.
 
 ---
 
 ## Key Features
 
-### Photo & PDF Editing
-- **Open any image or PDF page** for editing — JPG, PNG, BMP, TIFF, multi-page PDF
+### Photo Editing
 - **Brightness, contrast, saturation, sharpness** — fine-tune every photo
-- **Crop & rotate** — trim edges, fix orientation, straighten skewed scans
-- **Deskew** — automatically straighten tilted document scans
+- **Crop & rotate** — trim edges, fix orientation, straighten images
+- **Deskew** — automatically straighten tilted document images
 - **Black & white / grayscale conversion** — clean up documents instantly
 - **Hue & color correction** — fix color casts in photos
 - **Blank page detection** — auto-remove empty pages from batches
 
+### PDF Tools
+- **Export to searchable PDF** — with embedded OCR text layer
+- **Import existing PDFs** — open, edit pages, re-export
+- **Merge multiple images** into a single PDF
+- **Page reordering** — drag pages into any order before export
+- **PDF compression settings** — balance quality vs file size
+
 ### Paint Integration — Edit with Select & Cut
 APDocs Studio lets you send any image directly to **Microsoft Paint** for precision editing:
 
-1. Right-click any scanned page → **"Edit with Paint"**
+1. Right-click any page → **"Edit with Paint"**
 2. In Paint, use the **Select tool** (dotted rectangle in the toolbar) to draw a box around the area you want to keep or remove
 3. To **cut out** an unwanted section: select it → press `Ctrl + X` (Cut) — the area is removed and filled with white
-4. To **keep only a region**: select it → `Ctrl + C` (Copy) → `Ctrl + N` (New) → `Ctrl + V` (Paste) → save
+4. To **keep only a region**: select it → `Ctrl + C` → `Ctrl + N` → `Ctrl + V` → save
 5. Use **Free-form Select** for irregular shapes — draw around any object to isolate it
 6. Save in Paint (`Ctrl + S`) and APDocs Studio automatically reloads the edited image
 7. Export the final result as PDF with one click
 
-### PDF Tools
-- **Export to searchable PDF** — with embedded OCR text layer
-- **Import existing PDFs** — open, edit pages, re-export
-- **Merge multiple scans** into a single PDF
-- **Page reordering** — drag pages into any order before export
-- **PDF compression settings** — balance quality vs file size
-
-### Scanning
-- **WIA, TWAIN, ESCL (AirScan)** scanner support
-- **ADF batch scanning** — scan entire document stacks automatically
-- **Network scanner sharing** — share a USB scanner over your local network
-- **Scan profiles** — save settings per document type
-
 ### OCR
-- **Tesseract OCR** — extract text from any scanned image
+- **Tesseract OCR** — extract text from any image
 - **40+ languages** supported
 - Creates **fully searchable PDFs** with invisible text layer
 
@@ -89,6 +82,7 @@ Paint is built into every Windows PC and is perfect for quick, precise photo edi
 1. Open in Paint → Select the region you want to keep
 2. Click Image → Crop (or press Ctrl+Shift+X in newer Paint)
 3. Save → APDocs Studio picks up the cropped image
+4. Export as PDF with one click
 ```
 
 ---
@@ -115,11 +109,9 @@ dotnet run --project APDocsStudio.csproj
 
 | Action              | Shortcut            |
 |---------------------|---------------------|
-| Scan                | `Ctrl + Enter`      |
 | Save as PDF         | `Ctrl + S`          |
 | Save as Image       | `Ctrl + I`          |
 | Import file         | `Ctrl + O`          |
-| Batch Scan          | `Ctrl + B`          |
 | Run OCR             | `Ctrl + Alt + O`    |
 | Rotate Left         | `Ctrl + Shift + ←`  |
 | Rotate Right        | `Ctrl + Shift + →`  |
@@ -138,10 +130,8 @@ APDocsStudio/
 ├── APDocsStudio.csproj         # Main project file
 ├── NAPS2.Images/               # Core image processing & pixel ops
 ├── NAPS2.Images.Gdi/           # GDI+ (System.Drawing) image backend
-├── NAPS2.Escl/                 # ESCL protocol client & models
-├── NAPS2.Escl.Server/          # ESCL network scanner server
 ├── NAPS2.Internals/            # Shared utilities & threading
-├── NAPS2.Sdk/                  # Core scanning SDK (WIA/TWAIN/ESCL)
+├── NAPS2.Sdk/                  # Core document processing SDK
 ├── NAPS2.Lib/                  # App logic, config, UI controllers
 ├── NAPS2.Lib.WinForms/         # WinForms-specific UI layer
 ├── NAPS2.Setup/                # App settings & installer config
@@ -159,7 +149,6 @@ APDocsStudio/
 | Language | C# 12 / .NET 9 |
 | UI | Eto.Forms + WinForms |
 | DI | Autofac |
-| Scanning | NAPS2 SDK (WIA, TWAIN, ESCL) |
 | OCR | Tesseract via NAPS2.Tesseract.Binaries |
 | PDF | PdfSharp + Pdfium |
 | Image Processing | GDI+ / System.Drawing |
@@ -171,8 +160,6 @@ APDocsStudio/
 ## License
 
 Copyright © 2024 Atharv Pawar. All rights reserved.
-
-Core scanning libraries are derived from the [NAPS2 project](https://github.com/cyanfish/naps2) and licensed under the GPL. See individual `LICENSE` files in each subfolder.
 
 ---
 
