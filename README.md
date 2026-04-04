@@ -7,8 +7,8 @@
 **The most powerful photo & PDF editor for Windows.**
 Edit images with Paint, extract text with OCR, and export flawless PDFs — all in one free app.
 
-[![License](https://img.shields.io/badge/license-Proprietary-red.svg)](#license)
-[![Platform](https://img.shields.io/badge/platform-Windows-blue.svg)](#)
+[![License](https://img.shields.io/badge/license-GPL--2.0-blue.svg)](#license)
+[![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-blue.svg)](#)
 [![.NET](https://img.shields.io/badge/.NET-9.0-purple.svg)](#)
 [![GitHub Stars](https://img.shields.io/github/stars/atharvpawar16/APDocsStudio?style=social)](https://github.com/atharvpawar16/APDocsStudio)
 
@@ -50,7 +50,7 @@ No subscriptions. No cloud. No bloat. Just a fast, capable desktop app that runs
 | OCR Text Layer | Embed invisible searchable text into exported PDFs |
 
 ### 🎨 Paint Integration
-The only editor that lets you open any image directly in **Microsoft Paint** — already installed on every Windows PC — for precision editing using Paint's native Select & Cut tools. Changes sync back to APDocs Studio automatically.
+The only editor that lets you open any image directly in **Microsoft Paint** for precision editing using Paint's native Select & Cut tools. Changes sync back to APDocs Studio automatically.
 
 ### 🔍 OCR — Text Extraction
 Powered by **Tesseract**, one of the most accurate open-source OCR engines available. Extract text from any image in 40+ languages and create fully searchable, copy-pasteable PDFs.
@@ -62,7 +62,6 @@ Powered by **Tesseract**, one of the most accurate open-source OCR engines avail
 > Microsoft Paint is built into every Windows PC. APDocs Studio uses it as a precision editing tool.
 
 ### ✂️ Rectangular Select & Cut
-Remove any rectangular area from an image:
 ```
 1. Right-click a page in APDocs Studio → Edit with Paint
 2. In Paint's Home tab, click Select → Rectangular selection
@@ -72,7 +71,6 @@ Remove any rectangular area from an image:
 ```
 
 ### 🔷 Free-form Select
-Isolate any irregular shape:
 ```
 1. Click Select → Free-form selection
 2. Draw around the exact shape you want to keep
@@ -135,43 +133,6 @@ dotnet run --project APDocsStudio.csproj
 
 ---
 
-## Project Structure
-
-```
-APDocsStudio/
-├── Program.cs                    # Application entry point
-├── APDocsStudio.csproj           # Main project file
-├── GlobalUsings.cs               # Global using directives
-│
-├── NAPS2.Images/                 # Core image processing & pixel operations
-│   └── Bitwise/                  # Low-level bitwise image ops
-│   └── Transforms/               # Image transform pipeline
-│
-├── NAPS2.Images.Gdi/             # GDI+ / System.Drawing image backend
-├── NAPS2.Internals/              # Shared utilities, threading, serialization
-│
-├── NAPS2.Sdk/                    # Core document processing SDK
-│   ├── Images/                   # Image metadata & processing
-│   ├── Pdf/                      # PDF import/export via PdfSharp & Pdfium
-│   ├── Ocr/                      # Tesseract OCR engine integration
-│   └── ImportExport/             # File import/export pipeline
-│
-├── NAPS2.Lib/                    # Application logic & UI controllers
-│   ├── EtoForms/                 # Cross-platform UI layer (Eto.Forms)
-│   ├── Config/                   # App & user configuration system
-│   ├── Images/                   # UI image list, thumbnails, undo stack
-│   ├── Ocr/                      # OCR language management
-│   └── Pdf/                      # PDF settings & save operations
-│
-├── NAPS2.Lib.WinForms/           # WinForms-specific UI implementation
-├── NAPS2.Setup/                  # App settings & installer configuration
-└── Stubs/                        # Platform compatibility stubs
-```
-
-> **Note:** This repository shares ~50% of the full source. The complete UI layer, email integration, remoting, and auto-update system are not included.
-
----
-
 ## Tech Stack
 
 | Layer | Technology |
@@ -180,7 +141,7 @@ APDocsStudio/
 | Runtime | .NET 9 |
 | UI Framework | Eto.Forms + WinForms |
 | Dependency Injection | Autofac |
-| OCR Engine | Tesseract (via NAPS2.Tesseract.Binaries) |
+| OCR Engine | Tesseract |
 | PDF Processing | PdfSharp + Pdfium |
 | Image Processing | GDI+ / System.Drawing |
 | Logging | NLog |
@@ -191,11 +152,15 @@ APDocsStudio/
 
 ---
 
-## License
+## Open Source Attribution
 
-Copyright © 2024 **Atharv Pawar**. All rights reserved.
+APDocs Studio is built on top of several open-source libraries. In accordance with their licenses, the following attributions are required:
 
-The underlying document processing libraries are derived from the [NAPS2 project](https://github.com/cyanfish/naps2) and are subject to the GPL license. See individual `LICENSE` files in each subfolder for details.
+- **[NAPS2](https://github.com/cyanfish/naps2)** — Core document processing, image pipeline, OCR integration, and PDF engine. Licensed under [GPL-2.0](https://github.com/cyanfish/naps2/blob/master/LICENSE). Copyright © NAPS2 Contributors.
+
+APDocs Studio itself is also distributed under the **GPL-2.0** license in compliance with the above. See [`LICENSE`](./LICENSE) for full terms.
+
+> As required by GPL-2.0: the source code of APDocs Studio is publicly available in this repository. Any modifications made to GPL-licensed components are included here.
 
 ---
 
