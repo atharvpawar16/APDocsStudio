@@ -2,7 +2,16 @@ namespace NAPS2.Util;
 
 public static class ProcessHelper
 {
-    public static void OpenUrl(string url) => Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+    public static void OpenUrl(string url)
+    {
+        // Only allow http/https URLs to prevent shell injection via other URI schemes
+        if (!Uri.TryCreate(url, UriKind.Absolute, out var uri) ||
+            (uri.Scheme != Uri.UriSchemeHttp && uri.Scheme != Uri.UriSchemeHttps))
+        {
+            return;
+        }
+        Process.Start(new ProcessStartInfo(uri.AbsoluteUri) { UseShellExecute = true });
+    }
 
     public static void OpenFile(string file)
     {

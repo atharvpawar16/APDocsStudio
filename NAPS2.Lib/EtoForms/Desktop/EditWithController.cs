@@ -39,16 +39,19 @@ public class EditWithController(
         {
             try
             {
-                System.Diagnostics.Process.Start("mspaint.exe", $"\"{path}\"");
+                var psi = new System.Diagnostics.ProcessStartInfo("mspaint.exe");
+                psi.ArgumentList.Add(path);
+                System.Diagnostics.Process.Start(psi);
             }
             catch
             {
                 // fallback: try full path
-                System.Diagnostics.Process.Start(
+                var psi = new System.Diagnostics.ProcessStartInfo(
                     System.IO.Path.Combine(
                         Environment.GetFolderPath(Environment.SpecialFolder.System),
-                        "mspaint.exe"),
-                    $"\"{path}\"");
+                        "mspaint.exe"));
+                psi.ArgumentList.Add(path);
+                System.Diagnostics.Process.Start(psi);
             }
         }
     }

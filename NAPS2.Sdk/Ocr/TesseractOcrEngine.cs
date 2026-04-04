@@ -80,12 +80,29 @@ public class TesseractOcrEngine : IOcrEngine
             var startInfo = new ProcessStartInfo
             {
                 FileName = _tesseractPath,
-                Arguments = $"\"{imagePath}\" \"{tempHocrFilePath}\" -l {ocrParams.LanguageCode} {configVals}",
                 UseShellExecute = false,
                 CreateNoWindow = true,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true
             };
+#if NET6_0_OR_GREATER
+            startInfo.ArgumentList.Add(imagePath);
+            startInfo.ArgumentList.Add(tempHocrFilePath);
+            startInfo.ArgumentList.Add("-l");
+            startInfo.ArgumentList.Add(ocrParams.LanguageCode!);
+            foreach (var configArg in configVals.Split(' '))
+            {
+                startInfo.ArgumentList.Add(configArg);
+            }
+#else
+            // Validate LanguageCode to prevent argument injection on legacy targets
+            var langCode = ocrParams.LanguageCode ?? "";
+            if (!System.Text.RegularExpressions.Regex.IsMatch(langCode, @"^[a-zA-Z0-9_+\-]+$"))
+            {
+                throw new InvalidOperationException($"Invalid OCR language code: {langCode}");
+            }
+            startInfo.Arguments = $"\"{imagePath}\" \"{tempHocrFilePath}\" -l {langCode} {configVals}";
+#endif
             if (_languageDataBasePath != null)
             {
                 string languageDataPath = _languageDataBasePath;
