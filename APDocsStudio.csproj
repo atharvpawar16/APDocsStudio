@@ -1,0 +1,111 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9-windows</TargetFramework>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>NAPS2</RootNamespace>
+    <AssemblyName>APDocsStudio</AssemblyName>
+    <ApplicationIcon>NAPS2.Lib\Icons\favicon.ico</ApplicationIcon>
+    <SelfContained>false</SelfContained>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <Nullable>enable</Nullable>
+    <LangVersion>12</LangVersion>
+    <Title>APDocs Studio</Title>
+    <Product>APDocs Studio</Product>
+    <Company>Atharv Pawar</Company>
+    <Copyright>Copyright 2024 Atharv Pawar</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NAPS2.NTwain" Version="1.0.1" />
+    <PackageReference Include="NAPS2.Wia" Version="2.0.3" />
+    <PackageReference Include="NAPS2.Pdfium.Binaries" Version="1.2.0" />
+    <PackageReference Include="NAPS2.Tesseract.Binaries" Version="1.4.0" />
+    <PackageReference Include="Autofac" Version="8.0.0" />
+    <PackageReference Include="Eto.Forms" Version="2.8.3" />
+    <PackageReference Include="Eto.Platform.Windows" Version="2.8.3" />
+    <PackageReference Include="NLog" Version="5.3.2" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.11" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="GrpcDotNetNamedPipes" Version="3.0.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.65.0" PrivateAssets="all" />
+    <PackageReference Include="NAPS2.PdfSharp" Version="1.0.1" />
+    <PackageReference Include="MimeKitLite" Version="4.7.1" />
+    <PackageReference Include="CommandLineParser" Version="2.9.1" />
+    <PackageReference Include="Ben.Demystifier" Version="0.4.1" />
+    <PackageReference Include="SharpZipLib" Version="1.4.2" />
+    <PackageReference Include="SixLabors.Fonts" Version="1.0.1" />
+    <PackageReference Include="ZXing.Net" Version="0.16.9" />
+    <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
+    <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
+    <PackageReference Include="System.Threading.Tasks.Dataflow" Version="8.0.1" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
+    <PackageReference Include="NAPS2.Mdns" Version="1.0.1" />
+    <PackageReference Include="StandardSocketsHttpHandler" Version="2.2.0.8" />
+    <PackageReference Include="EmbedIO" Version="3.5.2" />
+    <PackageReference Include="IsExternalInit" Version="1.0.3" PrivateAssets="all" />
+    <PackageReference Include="Polyfill" Version="4.9.0" PrivateAssets="all" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.3" />
+  </ItemGroup>
+
+  <!-- Compile all source -->
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="GlobalUsings.cs" />
+    <Compile Include="Stubs\**\*.cs" />
+    <Compile Include="NAPS2.Internals\**\*.cs" />
+    <Compile Include="NAPS2.Images\**\*.cs" />
+    <Compile Include="NAPS2.Images.Gdi\**\*.cs" />
+    <Compile Include="NAPS2.Escl\**\*.cs" />
+    <Compile Include="NAPS2.Escl.Server\**\*.cs" />
+    <Compile Include="NAPS2.Sdk\**\*.cs" />
+    <Compile Include="NAPS2.Lib\**\*.cs" />
+    <Compile Include="NAPS2.Lib.WinForms\**\*.cs" />
+  </ItemGroup>
+
+  <!-- Exclude Mac/Linux/GTK and credential files -->
+  <ItemGroup>
+    <Compile Remove="NAPS2.Sdk\**\*Mac*" />
+    <Compile Remove="NAPS2.Sdk\**\*Sane*" />
+    <Compile Remove="NAPS2.Lib\**\*Mac*" />
+    <Compile Remove="NAPS2.Lib\**\*Gtk*" />
+    <Compile Remove="NAPS2.Lib\**\*Linux*" />
+    <Compile Remove="NAPS2.Lib\ClientCreds_.Designer.cs" />
+    <Compile Remove="NAPS2.Lib.WinForms\WinForms\DragScrollListView.cs" />
+    <EmbeddedResource Remove="NAPS2.Lib\ClientCreds_.resx" />
+  </ItemGroup>
+
+  <!-- Proto files -->
+  <ItemGroup>
+    <Protobuf Include="NAPS2.Sdk\**\*.proto" Access="Internal" ProtoRoot="NAPS2.Sdk" />
+    <Protobuf Include="NAPS2.Lib\**\*.proto" Access="Public" ProtoRoot="NAPS2.Lib" />
+  </ItemGroup>
+
+  <!-- Embedded resources - use Link to strip the NAPS2.Lib/ NAPS2.Sdk/ prefix -->
+  <ItemGroup>
+    <EmbeddedResource Include="NAPS2.Sdk\**\*.resx">
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAPS2.Lib\**\*.resx">
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NAPS2.Lib.WinForms\**\*.resx">
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <!-- App settings -->
+  <ItemGroup>
+    <ContentWithTargetPath Include="NAPS2.Setup\appsettings.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>appsettings.xml</TargetPath>
+    </ContentWithTargetPath>
+  </ItemGroup>
+
+</Project>

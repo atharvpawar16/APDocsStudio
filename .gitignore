@@ -1,0 +1,44 @@
+# Build outputs
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# NuGet
+*.nupkg
+packages/
+*.lock.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+nlog*.txt
+
+# Sensitive / private
+NAPS2.Lib/google.credentials.json
+NAPS2.Lib/microsoft.credentials.json
+NAPS2.Lib/default.credentials.json
+NAPS2.Lib/naps2-public.cer
+NAPS2.Lib/ClientCreds_.Designer.cs
+NAPS2.Lib/ClientCreds_.resx
+NAPS2.Lib/ClientCreds-.Designer.cs
+NAPS2.Lib/ClientCreds-.resx
+
+# Partial source — not shared publicly
+NAPS2.Lib/ImportExport/Email/
+NAPS2.Lib/Update/
+NAPS2.Lib/Remoting/
+NAPS2.Lib/Serialization/SecureStorage.cs
+NAPS2.Lib/Serialization/SecureString.cs
+NAPS2.Sdk/Remoting/
+NAPS2.Lib.WinForms/
+
+# Runtime / temp
+*.jit
+recovery/
+temp/
+components/
