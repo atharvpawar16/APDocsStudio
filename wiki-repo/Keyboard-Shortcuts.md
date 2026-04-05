@@ -13,13 +13,11 @@
 
 ---
 
-## Scanning & Batch
+## Batch Processing
 
 | Action | Shortcut |
 |---|---|
-| Scan (default profile) | `Ctrl + Enter` |
-| Batch scan | `Ctrl + B` |
-| Scan Profile 1–11 | `F2` – `F12` |
+| Batch process | `Ctrl + B` |
 | New profile | `Ctrl + N` |
 | Profiles list | `Ctrl + L` |
 
@@ -36,6 +34,7 @@
 | Move down | `Ctrl + ↓` |
 | Zoom in | `Ctrl + +` |
 | Zoom out | `Ctrl + -` |
+| Undo | `Ctrl + Z` |
 
 ---
 
@@ -46,27 +45,14 @@
 | Run OCR | `Ctrl + Alt + O` |
 | Email PDF (all) | `Ctrl + E` |
 | Email PDF (selected) | `Ctrl + Shift + E` |
-| Scanner sharing | `Ctrl + G` |
-| Settings | *(configurable)* |
 | About | `F1` |
 
 ---
 
-## PDF Settings
+## Settings
 
 | Action | Shortcut |
 |---|---|
 | PDF settings | `Ctrl + Alt + P` |
 | Image settings | `Ctrl + Alt + I` |
 | Email settings | `Ctrl + Alt + E` |
-
----
-
-## Selection & Reorder
-
-| Action | Shortcut |
-|---|---|
-| Clear all | `Ctrl + Shift + Del` |
-| Interleave | *(configurable)* |
-| Deinterleave | *(configurable)* |
-| Reverse all | *(configurable)* |

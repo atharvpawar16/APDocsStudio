@@ -34,7 +34,7 @@ dotnet run --project APDocsStudio.csproj
 
 ---
 
-## Publish (self-contained EXE)
+## Publish (Self-contained EXE)
 
 ```bash
 dotnet publish APDocsStudio.csproj --configuration Release --runtime win-x64 --self-contained false --output ./publish
@@ -54,9 +54,8 @@ APDocsStudio/
 ├── NAPS2.Images.Gdi/           # GDI+ image backend
 ├── NAPS2.Internals/            # Shared utilities
 ├── NAPS2.Sdk/                  # Core document SDK
-├── NAPS2.Lib/                  # App logic & UI controllers
-├── NAPS2.Lib.WinForms/         # WinForms UI layer
-├── NAPS2.Setup/                # App settings
+├── NAPS2.Lib/                  # App logic and UI controllers
+├── NAPS2.Setup/                # App settings and installer config
 └── landing/                    # Landing page (HTML)
 ```
 
@@ -66,6 +65,6 @@ APDocsStudio/
 
 1. Fork the repository
 2. Create a branch: `git checkout -b feature/your-feature`
-3. Make your changes and commit: `git commit -m "feat: add your feature"`
+3. Commit your changes: `git commit -m "feat: add your feature"`
 4. Push: `git push origin feature/your-feature`
 5. Open a Pull Request on GitHub

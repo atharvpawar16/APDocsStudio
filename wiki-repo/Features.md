@@ -1,6 +1,6 @@
 # Features
 
-## 🖼️ Photo Editing
+## Photo Editing
 
 | Feature | Description |
 |---|---|
@@ -14,7 +14,7 @@
 
 ---
 
-## 📄 PDF Tools
+## PDF Tools
 
 | Feature | Description |
 |---|---|
@@ -27,45 +27,44 @@
 
 ---
 
-## 🎨 Paint Integration
+## Paint Integration
 
 Send any image directly to Microsoft Paint for precision editing:
 
-- **Rectangular Select & Cut** — remove any area
-- **Free-form Select** — isolate irregular shapes
-- **Remove watermarks** — select and delete with white fill
-- **Crop to region** — keep only what you need
-- Changes **sync back automatically**
+- Rectangular Select & Cut — remove any rectangular area
+- Free-form Select — isolate irregular shapes
+- Remove watermarks — select and delete with white fill
+- Crop to region — keep only what you need
+- Changes sync back automatically
 
 See the full [Paint Integration Guide](Paint-Integration-Guide).
 
 ---
 
-## 🔍 OCR — Text Extraction
+## OCR — Text Extraction
 
-- Powered by **Tesseract** OCR engine
-- Supports **40+ languages**
-- Creates **fully searchable, copy-pasteable PDFs**
+- Powered by Tesseract OCR engine
+- Supports 40+ languages
+- Creates fully searchable, copy-pasteable PDFs
 - Runs automatically after import (configurable)
 
 ---
 
-## 📧 Export & Share
+## Export & Share
 
-- Export as **PDF, JPG, PNG, TIFF, or BMP**
-- Send directly via **Gmail, Outlook, or Thunderbird**
-- **Print** with full page layout control
-- **Auto-save profiles** for repetitive workflows
+- Export as PDF, JPG, PNG, TIFF, or BMP
+- Send directly via Gmail, Outlook, or Thunderbird
+- Print with full page layout control
+- Auto-save profiles for repetitive workflows
 
 ---
 
-## ⌨️ Keyboard Control
+## Keyboard Control
 
 Full keyboard control — see [Keyboard Shortcuts](Keyboard-Shortcuts) for the complete list.
 
 ---
 
-## 🌍 Multi-language UI
+## Multi-language UI
 
-The interface is localized into **40+ languages** including:
-English, Hindi, Arabic, Chinese, French, German, Spanish, Japanese, and more.
+The interface is localized into 40+ languages including English, Hindi, Arabic, Chinese, French, German, Spanish, Japanese, and more.

@@ -1,13 +1,13 @@
 # Changelog
 
-## v1.0.0 — 2024 (Initial Release)
+## v1.0.0 — Initial Release
 
 ### Added
 - Photo editing: brightness, contrast, saturation, hue, sharpness
 - Auto-deskew for tilted images
-- Black & white / grayscale conversion
+- Black & white and grayscale conversion
 - Blank page detection and auto-removal
-- PDF import and export (standard + searchable)
+- PDF import and export (standard and searchable)
 - Page merge, reorder, and compression control
 - Microsoft Paint integration — Edit with Paint, auto-reload on save
 - Tesseract OCR with 40+ language support
@@ -25,4 +25,4 @@
 
 ---
 
-*For full release notes see [Releases](https://github.com/atharvpawar16/APDocsStudio/releases)*
+For full release notes see [Releases](https://github.com/atharvpawar16/APDocsStudio/releases)

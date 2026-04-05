@@ -25,7 +25,7 @@
 
 1. Download `APDocsStudio-v1.0.0-win-x64.zip` from [Releases](https://github.com/atharvpawar16/APDocsStudio/releases/latest)
 2. Extract the ZIP to any folder
-3. Run `APDocsStudio.exe` inside the extracted folder
+3. Run `APDocsStudio.exe` from the extracted folder
 
 ### Option 3 — Build from Source
 
