@@ -390,7 +390,8 @@ public abstract class ListMutation<T> where T : notnull
         public override void Apply(List<T> list, ref ListSelection<T> selection)
         {
             int index = -1;
-            for (int i = 0; i < list.Count; i++)
+            // Only inspect starts that can contain the entire range.
+            for (int i = 0; i <= list.Count - _oldRange.Count; i++)
             {
                 if (EqualityComparer<T>.Default.Equals(list[i], _oldRange[0]))
                 {
@@ -409,6 +410,10 @@ public abstract class ListMutation<T> where T : notnull
                         break;
                     }
                 }
+            }
+            if (index == -1)
+            {
+                return;
             }
             list.RemoveRange(index, _oldRange.Count);
             list.InsertRange(index, _newRange);

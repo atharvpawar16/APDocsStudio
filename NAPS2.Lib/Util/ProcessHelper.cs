@@ -25,26 +25,40 @@ public static class ProcessHelper
 
     public static void OpenFolder(string folder) => OpenFile(folder);
 
+    /// <summary>
+    /// Runs a command without shell execution and reports whether it exits successfully within the timeout.
+    /// Output is discarded, but both redirected pipes must be drained to avoid blocking verbose commands.
+    /// </summary>
     public static bool TryRun(string command, string args, int timeoutMs)
     {
+        // Match Process.WaitForExit's timeout range without starting a process we cannot wait for.
+        if (timeoutMs < -1)
+        {
+            return false;
+        }
+
         try
         {
-            var process = Process.Start(new ProcessStartInfo(command, args)
+            using var process = Process.Start(new ProcessStartInfo(command, args)
             {
+                UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true
             });
-            if (process != null)
+            if (process == null)
             {
-                process.WaitForExit(timeoutMs);
-                bool result = process.HasExited && process.ExitCode == 0;
-                if (!process.HasExited)
-                {
-                    process.Kill();
-                }
-                return result;
+                return false;
             }
-            return false;
+
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+            if (!process.WaitForExit(timeoutMs))
+            {
+                process.Kill();
+                return false;
+            }
+
+            return process.ExitCode == 0;
         }
         catch (Exception)
         {

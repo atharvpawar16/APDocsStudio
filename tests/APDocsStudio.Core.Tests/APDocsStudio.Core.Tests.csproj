@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+  </ItemGroup>
+
+  <!-- Compile the actual platform-neutral production sources, not copies or mocks. -->
+  <ItemGroup>
+    <Compile Include="../../NAPS2.Lib/Util/ProcessHelper.cs" Link="Production/ProcessHelper.cs" />
+    <Compile Include="../../NAPS2.Lib/Util/ListMutation.cs" Link="Production/ListMutation.cs" />
+    <Compile Include="../../NAPS2.Lib/Util/ListSelection.cs" Link="Production/ListSelection.cs" />
+    <Compile Include="../../NAPS2.Internals/Util/CollectionExtensions.cs" Link="Production/CollectionExtensions.cs" />
+    <Compile Include="../../NAPS2.Internals/Util/DisposableList.cs" Link="Production/DisposableList.cs" />
+    <Using Include="System.Diagnostics" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>

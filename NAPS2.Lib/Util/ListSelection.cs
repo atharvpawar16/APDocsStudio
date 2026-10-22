@@ -61,7 +61,16 @@ public class ListSelection<T> : ICollection<T>, IEquatable<ListSelection<T>> whe
         return Equals((ListSelection<T>) obj);
     }
 
-    public override int GetHashCode() => _internalSelection.GetHashCode();
+    public override int GetHashCode()
+    {
+        // Equality compares sets, so hashing must ignore item order and duplicates too.
+        int hash = 0;
+        foreach (var item in _internalSelectionSet)
+        {
+            hash ^= EqualityComparer<T>.Default.GetHashCode(item);
+        }
+        return hash;
+    }
 
     public static bool operator ==(ListSelection<T> left, ListSelection<T> right) => Equals(left, right);
 

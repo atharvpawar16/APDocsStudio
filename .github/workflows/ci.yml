@@ -1,0 +1,53 @@
+name: Build and regression tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  core-tests:
+    name: Core tests (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Run platform-neutral regression tests
+        run: dotnet test tests/APDocsStudio.Core.Tests/APDocsStudio.Core.Tests.csproj --configuration Release --logger trx --results-directory TestResults
+      - name: Save test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: core-test-results-${{ matrix.os }}
+          path: TestResults/*.trx
+          retention-days: 7
+
+  windows-build:
+    name: Windows Release build
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Restore dependencies
+        run: dotnet restore APDocsStudio.sln
+      - name: Build Windows application and tests
+        run: dotnet build APDocsStudio.sln --configuration Release --no-restore
