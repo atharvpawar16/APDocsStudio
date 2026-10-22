@@ -28,14 +28,6 @@ NAPS2.Lib/ClientCreds_.resx
 NAPS2.Lib/ClientCreds-.Designer.cs
 NAPS2.Lib/ClientCreds-.resx
 
-# Partial source — not shared publicly
-NAPS2.Lib/ImportExport/Email/
-NAPS2.Lib/Update/
-NAPS2.Lib/Remoting/
-NAPS2.Lib/Serialization/SecureStorage.cs
-NAPS2.Lib/Serialization/SecureString.cs
-NAPS2.Sdk/Remoting/
-NAPS2.Lib.WinForms/
 
 # Runtime / temp
 *.jit
