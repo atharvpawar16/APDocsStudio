@@ -8,6 +8,8 @@ A free photo and PDF editor for Windows. Fix images, pull text out with OCR, and
 
 [Website](https://apdocsstudio.netlify.app) | [Download v1.0.0](https://github.com/atharvpawar16/APDocsStudio/releases/tag/v1.0.0) | [Wiki](https://github.com/atharvpawar16/APDocsStudio/wiki)
 
+[![Build and regression tests](https://github.com/atharvpawar16/APDocsStudio/actions/workflows/ci.yml/badge.svg)](https://github.com/atharvpawar16/APDocsStudio/actions/workflows/ci.yml) [![Version](https://img.shields.io/github/v/release/atharvpawar16/APDocsStudio?color=b87333)](https://github.com/atharvpawar16/APDocsStudio/releases/latest)
+
 </div>
 
 ![The APDocs Studio website](docs/website.png)
