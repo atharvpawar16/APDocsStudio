@@ -4,6 +4,8 @@
 
 # APDocs Studio
 
+[![views](https://hits.sh/github.com/atharvpawar16/APDocsStudio.svg?label=views)](https://hits.sh/github.com/atharvpawar16/APDocsStudio/)
+
 A free photo and PDF editor for Windows. Fix images, pull text out with OCR, and export clean PDFs, with Microsoft Paint wired in for quick cut-and-select edits.
 
 [Website](https://apdocsstudio.netlify.app) | [Download v1.0.0](https://github.com/atharvpawar16/APDocsStudio/releases/tag/v1.0.0) | [Wiki](https://github.com/atharvpawar16/APDocsStudio/wiki)
